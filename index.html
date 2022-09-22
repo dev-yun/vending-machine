@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <title>Vending Machine</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <h1 class="header-logo">
+        <img src="/images/logo.png" alt="메인 로고(콜라콜라)" />
+      </h1>
+    </header>
+    <main class="main-container">
+      <section class="purchase-section">
+        <h2 class="ir_wa">자판기</h2>
+        <ul class="cola-list">
+          <li class="cola-item cola-item_selected">1</li>
+          <li class="cola-item cola-item_sold-out">2</li>
+          <li class="cola-item">3</li>
+          <li class="cola-item">4</li>
+          <li class="cola-item cola-item_selected">5</li>
+          <li class="cola-item">6</li>
+        </ul>
+        <div class="controls">
+          <p class="change">
+            잔액 : <strong class="change-cash">1,000원</strong>
+          </p>
+          <button class="change-button">거스름돈 반환</button>
+          <input type="number" class="insert-cash" placeholder="입금액 입력" />
+          <button class="insert-cash-button">입금</button>
+          <ul class="purchase-cola-list">
+            <li class="purchase-cola-item">1</li>
+            <li class="purchase-cola-item">2</li>
+            <li class="purchase-cola-item">3</li>
+          </ul>
+          <button class="gain-button">획득</button>
+        </div>
+      </section>
+      <section class="result-section"></section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+body {
+  background-color: #eae8fe;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* utils */
+.ir_wa {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+/* header */
+.main-header {
+  background-color: white;
+  margin-bottom: 67px;
+}
+
+.header-logo {
+  width: 436px;
+  height: 204px;
+  text-align: center;
+}
+
+.header-logo > img {
+  width: 386px;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* main */
+.main-container {
+  background-color: peachpuff;
+
+  width: 740px;
+  height: 545px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+/* left box(purchase-section) */
+.purchase-section {
+  width: 360px;
+  height: 545px;
+  background-color: white;
+}
+
+/* cola 선택창 */
+.cola-list {
+  display: grid;
+  grid-template-columns: repeat(3, 94px);
+  grid-auto-rows: 130px;
+  grid-gap: 12px;
+
+  padding: 31px 27px 20px;
+}
+
+.cola-item {
+  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
+  border: 3px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.cola-item_selected {
+  border: 3px solid #6327fe;
+}
+
+.cola-item_sold-out {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* 입금, 거스름돈, 획득 부분 */
+.controls {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr;
+
+  padding: 0px 27px;
+  gap: 12px;
+}
+
+/* right box(result-section) */
+.result-section {
+  width: 360px;
+  height: 545px;
+  background-color: dodgerblue;
+}
