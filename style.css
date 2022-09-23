@@ -18,6 +18,10 @@ body {
   height: 100%;
 }
 
+.wrapper {
+  padding: 0 27px;
+}
+
 /* header */
 .main-header {
   background-color: white;
@@ -61,7 +65,8 @@ body {
   grid-auto-rows: 130px;
   grid-gap: 12px;
 
-  padding: 31px 27px 20px;
+  padding-top: 31px;
+  padding-bottom: 20px;
 }
 
 .cola-item {
@@ -84,7 +89,6 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr 2fr;
 
-  padding: 0px 27px;
   gap: 12px;
 }
 
@@ -93,4 +97,37 @@ body {
   width: 360px;
   height: 545px;
   background-color: dodgerblue;
+}
+
+.rest-cash {
+  background-color: greenyellow;
+  width: 306px;
+  height: 32px;
+
+  background: #eae8fe;
+}
+
+.purchased-cola-title {
+  text-align: center;
+}
+
+.purchased-cola-list {
+  background-color: blanchedalmond;
+  width: 306px;
+  height: 364px;
+
+  overflow: scroll;
+  background: #eae8fe;
+}
+
+.purchased-cola-item {
+  width: 276px;
+  height: 46px;
+  margin: 12px auto;
+
+  background: #ffffff;
+}
+
+.total-price {
+  text-align: end;
 }

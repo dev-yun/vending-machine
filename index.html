@@ -17,7 +17,7 @@
     <main class="main-container">
       <section class="purchase-section">
         <h2 class="ir_wa">자판기</h2>
-        <ul class="cola-list">
+        <ul class="wrapper cola-list">
           <li class="cola-item cola-item_selected">1</li>
           <li class="cola-item cola-item_sold-out">2</li>
           <li class="cola-item">3</li>
@@ -25,7 +25,7 @@
           <li class="cola-item cola-item_selected">5</li>
           <li class="cola-item">6</li>
         </ul>
-        <div class="controls">
+        <div class="wrapper controls">
           <p class="change">
             잔액 : <strong class="change-cash">1,000원</strong>
           </p>
@@ -40,7 +40,22 @@
           <button class="gain-button">획득</button>
         </div>
       </section>
-      <section class="result-section"></section>
+      <section class="result-section">
+        <h2 class="ir_wa">소지금과 획득한 음료 목록</h2>
+        <div class="wrapper">
+          <p class="rest-cash">소지금 : <strong>25,000 원</strong></p>
+        </div>
+        <article class="wrapper">
+          <h3 class="purchased-cola-title">획득한 음료</h3>
+          <ul class="purchased-cola-list">
+            <li class="purchased-cola-item"><img src="" alt="" /></li>
+            <li class="purchased-cola-item"><img src="" alt="" /></li>
+            <li class="purchased-cola-item"><img src="" alt="" /></li>
+            <li class="purchased-cola-item"><img src="" alt="" /></li>
+          </ul>
+          <p class="total-price">총금액 : <strong>9,000 원</strong></p>
+        </article>
+      </section>
     </main>
   </body>
 </html>
