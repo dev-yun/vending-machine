@@ -1,3 +1,5 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 body {
   background-color: #eae8fe;
   width: 100vw;
@@ -18,13 +20,164 @@ body {
   height: 100%;
 }
 
+.base-font-small {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 13px;
+
+  color: #333333;
+}
+
+.base-font-normal {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+}
+
+.base-font-normal_13 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.base-font-normal_14 {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.base-font-normal_14_bold {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* util scroll */
+.scroll_custom {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.scroll_custom::-webkit-scrollbar {
+  width: 8px;
+  background-color: inherit;
+}
+.scroll_custom::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  height: 79px;
+  border-radius: 50px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.scroll_custom::-webkit-scrollbar-track {
+  background-color: inherit;
+}
+
+/* commons */
+
 .wrapper {
   padding: 0 27px;
 }
 
+.button-design {
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+/* 수직 콜라 figure */
+.vertical-cola-figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 100%;
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.vertical-cola-figure > img {
+  width: 36px;
+  height: 65px;
+
+  padding-top: 8px;
+}
+
+.vertical-cola-figure > figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cola-type {
+  padding: 3px 0px;
+}
+
+.cola-price {
+  background-color: #6327fe;
+  color: #ffffff;
+
+  width: 70px;
+  height: 22px;
+
+  border-radius: 50px;
+
+  box-sizing: border-box;
+  padding: 4px 0px;
+  text-align: center;
+  margin-bottom: 2px;
+}
+
+/* 수평 콜라 figure */
+.horizontal-cola-figure {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal-cola-figure > img {
+  width: 18px;
+  height: 33px;
+  padding: 10px;
+}
+
+.horizontal-cola-figure > figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-grow: 1;
+}
+
+.horizontal-cola_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  flex-shrink: 1;
+
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+
+  margin: 8px;
+}
+
 /* header */
 .main-header {
-  background-color: white;
   margin-bottom: 67px;
 }
 
@@ -42,8 +195,6 @@ body {
 
 /* main */
 .main-container {
-  background-color: peachpuff;
-
   width: 740px;
   height: 545px;
 
@@ -53,15 +204,13 @@ body {
 
 /* left box(purchase-section) */
 .purchase-section {
-  width: 360px;
-  height: 545px;
   background-color: white;
 }
 
 /* cola 선택창 */
 .cola-list {
   display: grid;
-  grid-template-columns: repeat(3, 94px);
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 130px;
   grid-gap: 12px;
 
@@ -71,8 +220,10 @@ body {
 
 .cola-item {
   filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
-  border: 3px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+
+  position: relative;
 }
 
 .cola-item_selected {
@@ -80,52 +231,141 @@ body {
 }
 
 .cola-item_sold-out {
-  background: rgba(0, 0, 0, 0.8);
+  background-image: url("/images/Sold-out.png");
+  background-position: center;
+  background-size: 58px 45px;
+  background-repeat: no-repeat;
+
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.cola-item_sold-out > figure {
+  opacity: 0.25;
 }
 
 /* 입금, 거스름돈, 획득 부분 */
 .controls {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 2fr;
+  grid-template-columns: 200px 94px;
+  grid-template-rows: 32px 32px 106px;
 
   gap: 12px;
+}
+
+.change {
+  background-color: #eae8fe;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0px 10px;
+
+  border-radius: 5px;
+}
+
+.change-button {
+  background-color: #ffffff;
+}
+
+.insert-cash {
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+}
+
+.insert-cash::placeholder {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 19px;
+  color: #bdbdbd;
+
+  padding: 6px;
+}
+
+.insert-cash-button {
+  background-color: #ffffff;
+}
+
+.selected-cola-list {
+  background-color: #eae8fe;
+  border-radius: 5px;
+  border: 1px solid #bdbdbd;
+}
+
+.selected-cola-item {
+  width: 92%;
+  height: 46px;
+  background-color: #ffffff;
+
+  margin: 6px 10px 6px 12px;
+
+  border-radius: 5px;
+}
+
+.selected-cola-item:first-child {
+  margin-top: 12px;
+}
+
+.gain-button {
+  background-color: #6327fe;
+  color: #ffffff;
+  border-radius: 5px;
 }
 
 /* right box(result-section) */
 .result-section {
   width: 360px;
   height: 545px;
-  background-color: dodgerblue;
+}
+
+.rest-cash-box {
+  background-color: #ffffff;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 .rest-cash {
-  background-color: greenyellow;
-  width: 306px;
-  height: 32px;
+  background-color: #eae8fe;
+  width: 100%;
 
-  background: #eae8fe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 6px 10px;
+
+  border-radius: 5px;
+}
+
+.purchased-cola-article {
+  background-color: #ffffff;
+  height: 475px;
+
+  box-sizing: border-box;
 }
 
 .purchased-cola-title {
   text-align: center;
+  padding-top: 25px;
 }
 
 .purchased-cola-list {
-  background-color: blanchedalmond;
-  width: 306px;
   height: 364px;
 
-  overflow: scroll;
   background: #eae8fe;
-}
 
-.purchased-cola-item {
-  width: 276px;
-  height: 46px;
-  margin: 12px auto;
+  margin-top: 13px;
+  margin-bottom: 6px;
 
-  background: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #bdbdbd;
 }
 
 .total-price {

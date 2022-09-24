@@ -23,3 +23,28 @@ ul {
 
   list-style-type: none;
 }
+
+figure {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+p {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+}
+
+strong {
+  font-weight: inherit;
+}
+
+button {
+  border-style: none;
+  cursor: pointer;
+}
+
+input {
+  border-style: none;
+}
