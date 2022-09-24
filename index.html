@@ -18,42 +18,249 @@
       <section class="purchase-section">
         <h2 class="ir_wa">자판기</h2>
         <ul class="wrapper cola-list">
-          <li class="cola-item cola-item_selected">1</li>
-          <li class="cola-item cola-item_sold-out">2</li>
-          <li class="cola-item">3</li>
-          <li class="cola-item">4</li>
-          <li class="cola-item cola-item_selected">5</li>
-          <li class="cola-item">6</li>
+          <li class="cola-item cola-item_selected">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Original_Cola.png"
+                alt="오리지날 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Original_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="cola-item cola-item_sold-out">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Violet_Cola.png"
+                alt="보라색 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Violet_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="cola-item">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Yellow_Cola.png"
+                alt="노란색 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Yellow_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="cola-item">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Cool_Cola.png"
+                alt="하늘색 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Cool_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="cola-item cola-item_selected">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Green_Cola.png"
+                alt="초록색 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Green_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
+          <li class="cola-item">
+            <figure class="vertical-cola-figure">
+              <img
+                src="images/Orange_Cola.png"
+                alt="주황색 콜라"
+                class="vending-cola_img"
+              />
+              <figcaption>
+                <p class="base-font-small cola-type">Orange_Cola</p>
+                <p class="base-font-normal cola-price">1000원</p>
+              </figcaption>
+            </figure>
+          </li>
         </ul>
         <div class="wrapper controls">
-          <p class="change">
-            잔액 : <strong class="change-cash">1,000원</strong>
+          <p class="change base-font-normal_14">
+            잔액 : <strong>1,000원</strong>
           </p>
-          <button class="change-button">거스름돈 반환</button>
-          <input type="number" class="insert-cash" placeholder="입금액 입력" />
-          <button class="insert-cash-button">입금</button>
-          <ul class="purchase-cola-list">
-            <li class="purchase-cola-item">1</li>
-            <li class="purchase-cola-item">2</li>
-            <li class="purchase-cola-item">3</li>
+          <button class="change-button button-design base-font-normal_13">
+            거스름돈 반환
+          </button>
+          <input
+            type="number"
+            class="insert-cash base-font-normal_14"
+            placeholder="입금액 입력"
+          />
+          <button class="insert-cash-button button-design base-font-normal_14">
+            입금
+          </button>
+          <ul class="selected-cola-list scroll_custom">
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Original_Cola.png"
+                  alt="선택된 오리지날 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Green_Cola.png"
+                  alt="선택된 초록색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Green_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">30</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Orange_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">3</p>
+                </figcaption>
+              </figure>
+            </li>
           </ul>
-          <button class="gain-button">획득</button>
+          <button class="gain-button base-font-normal_13">획득</button>
         </div>
       </section>
       <section class="result-section">
         <h2 class="ir_wa">소지금과 획득한 음료 목록</h2>
-        <div class="wrapper">
-          <p class="rest-cash">소지금 : <strong>25,000 원</strong></p>
+        <div class="rest-cash-box wrapper">
+          <p class="rest-cash base-font-normal_14">
+            소지금 : <strong class="base-font-normal_14_bold">25,000 원</strong>
+          </p>
         </div>
-        <article class="wrapper">
-          <h3 class="purchased-cola-title">획득한 음료</h3>
-          <ul class="purchased-cola-list">
-            <li class="purchased-cola-item"><img src="" alt="" /></li>
-            <li class="purchased-cola-item"><img src="" alt="" /></li>
-            <li class="purchased-cola-item"><img src="" alt="" /></li>
-            <li class="purchased-cola-item"><img src="" alt="" /></li>
+        <article class="purchased-cola-article wrapper">
+          <h3 class="purchased-cola-title base-font-normal_14_bold">
+            획득한 음료
+          </h3>
+          <ul class="purchased-cola-list scroll_custom">
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
+            <li class="selected-cola-item">
+              <figure class="horizontal-cola-figure">
+                <img
+                  src="images/Orange_Cola.png"
+                  alt="선택된 주황색 콜라"
+                  class="vending-cola_img"
+                />
+                <figcaption>
+                  <p class="base-font-small">Original_Cola</p>
+                  <p class="horizontal-cola_count base-font-normal_14">1</p>
+                </figcaption>
+              </figure>
+            </li>
           </ul>
-          <p class="total-price">총금액 : <strong>9,000 원</strong></p>
+          <p class="total-price base-font-normal">총금액 : 9,000 원</p>
         </article>
       </section>
     </main>
