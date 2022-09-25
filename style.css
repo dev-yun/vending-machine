@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap");
 
 body {
   background-color: #eae8fe;
@@ -68,7 +68,7 @@ body {
   overflow-y: scroll;
 }
 .scroll_custom::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
   background-color: inherit;
 }
 .scroll_custom::-webkit-scrollbar-thumb {
@@ -76,10 +76,16 @@ body {
   height: 79px;
   border-radius: 50px;
   background-clip: padding-box;
-  border: 2px solid transparent;
+  border: 4px solid transparent;
 }
 .scroll_custom::-webkit-scrollbar-track {
   background-color: inherit;
+}
+
+.scroll_custom::after {
+  content: "";
+  display: block;
+  height: 400px;
 }
 
 /* commons */
@@ -89,7 +95,7 @@ body {
 }
 
 .button-design {
-  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.5));
   border-radius: 5px;
 }
 
@@ -110,7 +116,7 @@ body {
   width: 36px;
   height: 65px;
 
-  padding-top: 8px;
+  padding-top: 11px;
 }
 
 .vertical-cola-figure > figcaption {
@@ -120,7 +126,7 @@ body {
 }
 
 .cola-type {
-  padding: 3px 0px;
+  padding: 6px 0px;
 }
 
 .cola-price {
@@ -135,7 +141,7 @@ body {
   box-sizing: border-box;
   padding: 4px 0px;
   text-align: center;
-  margin-bottom: 2px;
+  margin-bottom: 9px;
 }
 
 /* 수평 콜라 figure */
@@ -177,14 +183,13 @@ body {
 }
 
 /* header */
-.main-header {
-  margin-bottom: 67px;
-}
 
 .header-logo {
   width: 436px;
   height: 204px;
   text-align: center;
+
+  margin-bottom: 43px;
 }
 
 .header-logo > img {
@@ -218,9 +223,16 @@ body {
 }
 
 .cola-item {
-  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
   border-radius: 10px;
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.cola-item:hover {
+  transform: scale(1.05);
+}
+
+.cola-item:focus-visible {
+  border: 2px solid #6327fe;
 }
 
 .cola-item_selected {
@@ -228,15 +240,25 @@ body {
 }
 
 .cola-item_sold-out {
+  position: relative;
+}
+
+.cola-item_sold-out::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+
+  background-color: rgba(0, 0, 0, 0.8);
   background-image: url("/images/Sold-out.png");
   background-position: center;
   background-size: 58px 45px;
   background-repeat: no-repeat;
-
-  background-color: rgba(0, 0, 0, 0.8);
-}
-.cola-item_sold-out > figure {
-  opacity: 0.25;
 }
 
 /* 입금, 거스름돈, 획득 부분 */
@@ -293,13 +315,13 @@ body {
 }
 
 .selected-cola-item {
-  width: 92%;
   height: 46px;
   background-color: #ffffff;
 
   margin: 6px 10px 6px 12px;
 
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .selected-cola-item:first-child {
@@ -368,4 +390,33 @@ body {
 
 .total-price {
   text-align: end;
+}
+
+/* media query */
+@media screen and (max-width: 740px) {
+  .header-logo {
+    width: 188px;
+    height: 88px;
+
+    text-align: center;
+
+    margin-bottom: 8px;
+  }
+
+  .header-logo > img {
+    width: 166px;
+    height: 78px;
+    object-fit: contain;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 360px;
+  }
+
+  .rest-cash-box {
+    margin-bottom: 0px;
+  }
 }
