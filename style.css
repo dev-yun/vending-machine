@@ -99,51 +99,6 @@ body {
   border-radius: 5px;
 }
 
-/* 수직 콜라 figure */
-.vertical-cola-figure {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-
-  height: 100%;
-
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.vertical-cola-figure > img {
-  width: 36px;
-  height: 65px;
-
-  padding-top: 11px;
-}
-
-.vertical-cola-figure > figcaption {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cola-type {
-  padding: 6px 0px;
-}
-
-.cola-price {
-  background-color: #6327fe;
-  color: #ffffff;
-
-  width: 70px;
-  height: 22px;
-
-  border-radius: 50px;
-
-  box-sizing: border-box;
-  padding: 4px 0px;
-  text-align: center;
-  margin-bottom: 9px;
-}
-
 /* 수평 콜라 figure */
 .horizontal-cola-figure {
   display: flex;
@@ -259,6 +214,46 @@ body {
   background-position: center;
   background-size: 58px 45px;
   background-repeat: no-repeat;
+}
+
+/* 자판기 콜라 버튼 */
+.vending-cola-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0px;
+  background-color: inherit;
+  cursor: pointer;
+}
+.vending-cola-button > img {
+  width: 36px;
+  height: 65px;
+
+  padding-top: 11px;
+}
+
+.cola-type {
+  padding: 6px 0px;
+}
+
+.cola-price {
+  background-color: #6327fe;
+  color: #ffffff;
+
+  width: 70px;
+  height: 22px;
+
+  border-radius: 50px;
+
+  box-sizing: border-box;
+  padding: 4px 0px;
+  text-align: center;
+  margin-bottom: 9px;
 }
 
 /* 입금, 거스름돈, 획득 부분 */
