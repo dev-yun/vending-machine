@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "CommonJS",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "lib": ["ES2016", "DOM"],
+    "outDir": "dist",
+    "target": "ES6"
+  },
+  "include": ["src/**/*.ts"]
+}
