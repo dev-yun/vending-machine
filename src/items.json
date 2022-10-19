@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "image": "./images/original_cola.svg",
+      "type": "Original_cola",
+      "color": "original",
+      "price": 1000
+    },
+
+    {
+      "image": "./images/violet_cola.svg",
+      "type": "Violet_cola",
+      "color": "violet",
+      "price": 1000
+    },
+
+    {
+      "image": "./images/yellow_cola.svg",
+      "type": "Yellow_cola",
+      "color": "yellow",
+      "price": 1000
+    },
+
+    {
+      "image": "./images/cool_cola.svg",
+      "type": "Cool_cola",
+      "color": "cool",
+      "price": 1000
+    },
+
+    {
+      "image": "./images/green_cola.svg",
+      "type": "Green_cola",
+      "color": "green",
+      "price": 1000
+    },
+
+    {
+      "image": "./images/orange_cola.svg",
+      "type": "Orange_cola",
+      "color": "orange",
+      "price": 1000
+    }
+  ]
+}
