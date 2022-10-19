@@ -18,7 +18,7 @@
       <section class="purchase-section">
         <h2 class="ir_wa">자판기</h2>
         <ul class="wrapper cola-list">
-          <li class="cola-item cola-item_selected">
+          <li class="cola-item">
             <button class="vending-cola-button">
               <img
                 src="images/Original_Cola.png"
@@ -29,7 +29,7 @@
               <span class="base-font-normal cola-price">1000원</span>
             </button>
           </li>
-          <li class="cola-item cola-item_sold-out">
+          <li class="cola-item">
             <button class="vending-cola-button">
               <img
                 src="images/Violet_Cola.png"
@@ -62,7 +62,7 @@
               <span class="base-font-normal cola-price">1000원</span>
             </button>
           </li>
-          <li class="cola-item cola-item_selected">
+          <li class="cola-item">
             <button class="vending-cola-button">
               <img
                 src="images/Green_Cola.png"
@@ -87,7 +87,7 @@
         </ul>
         <div class="wrapper controls">
           <p class="change base-font-normal_14">
-            잔액 : <strong>1,000원</strong>
+            잔액 : <strong class="change_price">1,000원</strong>
           </p>
           <button class="change-button button-design base-font-normal_13">
             거스름돈 반환
@@ -101,7 +101,7 @@
             입금
           </button>
           <ul class="selected-cola-list scroll_custom">
-            <li class="selected-cola-item">
+            <!-- <li class="selected-cola-item">
               <figure class="horizontal-cola-figure">
                 <img
                   src="images/Original_Cola.png"
@@ -139,7 +139,7 @@
                   <p class="horizontal-cola_count base-font-normal_14">3</p>
                 </figcaption>
               </figure>
-            </li>
+            </li> -->
           </ul>
           <button class="gain-button base-font-normal_13">획득</button>
         </div>
@@ -156,7 +156,7 @@
             획득한 음료
           </h3>
           <ul class="purchased-cola-list scroll_custom">
-            <li class="selected-cola-item">
+            <!-- <li class="selected-cola-item">
               <figure class="horizontal-cola-figure">
                 <img
                   src="images/Original_Cola.png"
@@ -207,11 +207,12 @@
                   <p class="horizontal-cola_count base-font-normal_14">5</p>
                 </figcaption>
               </figure>
-            </li>
+            </li> -->
           </ul>
           <p class="total-price base-font-normal">총금액 : 9,000 원</p>
         </article>
       </section>
     </main>
+    <script src="/dist/selectCola.js"></script>
   </body>
 </html>
