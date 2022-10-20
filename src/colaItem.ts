@@ -3,10 +3,16 @@ interface colaItem {
   image: string;
   type: string;
   color: string;
-  price?: number;
+  price: number;
+  selectedCount?: number;
 }
-interface selectedColaItem extends colaItem {
+
+interface vendingColaItem extends colaItem {
   count: number;
+}
+
+interface selectedColaItem extends colaItem {
+  selectedCount: number;
 }
 
 async function getColas() {
@@ -21,12 +27,12 @@ const paintColaList = (colaList: any) => {
     document.querySelector('.cola-list');
   if (colaParentEl !== null) {
     colaParentEl.innerHTML = colaList
-      .map((cola: colaItem) => createColaListString(cola))
+      .map((cola: vendingColaItem) => createColaListString(cola))
       .join('');
   }
 };
 
-const createColaListString = (cola: colaItem) => {
+const createColaListString = (cola: vendingColaItem) => {
   return `<li class="cola-item">
         <button class="vending-cola-button">
           <img src=${cola.image} alt=${cola.color} class="vending-cola_img" />
@@ -36,8 +42,8 @@ const createColaListString = (cola: colaItem) => {
       </li>`;
 };
 
-const selectColaItemHoverEvent = (colaItems: NodeList) => {
-  Array.prototype.forEach.call(colaItems, (colaItem: HTMLLIElement) => {
+const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
+  Array.prototype.forEach.call(vendingColaItems, (colaItem: HTMLLIElement) => {
     colaItem.addEventListener('mouseover', () => {
       colaItem.classList.add('cola-item_selected');
     });
@@ -47,25 +53,30 @@ const selectColaItemHoverEvent = (colaItems: NodeList) => {
   });
 };
 
-const selectColaItemClickEvent = (colaItems: NodeList, colaList: any) => {
+const vendingColaItemClickEvent = (
+  vendingColaItems: NodeList,
+  colaList: any
+) => {
   Array.prototype.forEach.call(
-    colaItems,
+    vendingColaItems,
     (colaItem: Element, index: number) => {
       colaItem.addEventListener('click', () => {
         console.log(colaList[index]);
-        paintSelectedCola(colaList[index]);
+        if (colaList[index].count > 0) {
+          colaItem.classList.remove('cola-item_sold-out');
+          colaList[index].selectedCount += 1;
+          paintSelectedCola(colaList[index]);
+        } else {
+          colaItem.classList.add('cola-item_sold-out');
+          colaList[index].count = 1;
+        }
+        colaList[index].count -= 1;
       });
     }
   );
 };
 
-// 클릭 횟수를 기준으로 count가 올라가도록 해야함
-// 자판기 콜라와 선택된 콜라가 맵핑되어 같은 상태(count)를 공유해야함
-// 즉, 선택된 콜라를 클릭하면 선택된 콜라와 자판기 콜라가 리렌더링되고,
-// 자판기 콜라를 클릭하면 자판기 콜라와 선택된 콜라가 리렌더링되야함
-
-// paint는 자판기에서 클릭될때 +count, 선택된 콜라를 클릭할때 -count를 해야함
-// (count === 0 => 선택된 콜라 삭제), (count === max => 자판기 콜라 class style 추가)
+// todo : 클릭될때 새로운 요소가 추가되는 것이 아니라 기존의 요소에서 colaItem.selectedCount 부분만 변해야함
 
 const paintSelectedCola = (colaItem: selectedColaItem) => {
   const selectedColaParent: HTMLUListElement | null = document.querySelector(
@@ -83,11 +94,12 @@ const paintSelectedCola = (colaItem: selectedColaItem) => {
                  />
     <figcaption>
     <p class="base-font-small">${colaItem.type}</p>
-    <p class="horizontal-cola_count base-font-normal_14">${1}</p>
+    <p class="horizontal-cola_count base-font-normal_14">${colaItem.selectedCount}</p>
     </figcaption>
     </figure>
     </li>`
     );
+  } else {
   }
 };
 
@@ -102,7 +114,12 @@ getColas()
     return colaList;
   })
   .then((colaList) => {
-    const selectCola: NodeList = document.querySelectorAll('.cola-item');
-    selectColaItemHoverEvent(selectCola);
-    selectColaItemClickEvent(selectCola, colaList);
+    const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
+    vendingColaItemHoverEvent(vendingColaItems);
+    // 클릭 발생시 count 이동
+    vendingColaItemClickEvent(vendingColaItems, colaList);
+    return colaList;
+  })
+  .then((colaList) => {
+    console.log(colaList);
   });
