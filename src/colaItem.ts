@@ -1,3 +1,5 @@
+const MAX_COLA_COUNT = 5;
+
 // 자판기 콜라 선택 아이템 생성 & 선택 function (coke로 할껄...)
 interface colaItem {
   image: string;
@@ -13,17 +15,17 @@ async function getColas() {
   return colaData;
 }
 
-const paintColaList = (colaData: any) => {
-  let colaParentEl: HTMLUListElement | null =
+const paintVendingColaList = (colaData: any) => {
+  let vendingColaParentEl: HTMLUListElement | null =
     document.querySelector('.cola-list');
-  if (colaParentEl !== null) {
-    colaParentEl.innerHTML = colaData
-      .map((cola: colaItem) => createColaListString(cola))
+  if (vendingColaParentEl !== null) {
+    vendingColaParentEl.innerHTML = colaData
+      .map((cola: colaItem) => vendingColaTemplate(cola))
       .join('');
   }
 };
 
-const createColaListString = (cola: colaItem) => {
+const vendingColaTemplate = (cola: colaItem) => {
   return `<li class="cola-item">
         <button class="vending-cola-button">
           <img src=${cola.image} alt=${cola.color} class="vending-cola_img" />
@@ -34,15 +36,21 @@ const createColaListString = (cola: colaItem) => {
 };
 
 const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
-  Array.prototype.forEach.call(vendingColaItems, (colaItem: HTMLLIElement) => {
-    colaItem.addEventListener('mouseover', () => {
-      colaItem.classList.add('cola-item_selected');
-    });
-    colaItem.addEventListener('mouseout', () => {
-      colaItem.classList.remove('cola-item_selected');
-    });
-  });
+  Array.prototype.forEach.call(
+    vendingColaItems,
+    (vendingColaItem: HTMLLIElement) => {
+      vendingColaItem.addEventListener('mouseover', () => {
+        vendingColaItem.classList.add('cola-item_selected');
+      });
+      vendingColaItem.addEventListener('mouseout', () => {
+        vendingColaItem.classList.remove('cola-item_selected');
+      });
+    }
+  );
 };
+
+// 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
+// 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
 
 // const vendingColaItemClickEvent = (
 //   vendingColaItems: NodeList,
@@ -101,13 +109,11 @@ const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
 
 getColas()
   .then((colaData) => {
-    paintColaList(colaData);
+    paintVendingColaList(colaData);
     return colaData;
   })
   .then((colaData) => {
     const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
     vendingColaItemHoverEvent(vendingColaItems);
-    // 클릭 발생시 count 이동
-    // vendingColaItemClickEvent(vendingColaItems, colaList);
     return colaData;
   });
