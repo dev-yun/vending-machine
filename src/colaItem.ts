@@ -6,6 +6,7 @@ interface colaItem {
   type: string;
   color: string;
   price: number;
+  count?: number;
 }
 
 async function getColas() {
@@ -16,7 +17,7 @@ async function getColas() {
 }
 
 const paintVendingColaList = (colaData: any) => {
-  let vendingColaParentEl: HTMLUListElement | null =
+  const vendingColaParentEl: HTMLUListElement | null =
     document.querySelector('.cola-list');
   if (vendingColaParentEl !== null) {
     vendingColaParentEl.innerHTML = colaData
@@ -49,6 +50,75 @@ const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
   );
 };
 
+const vendingColaItemClickEvent = (
+  vendingColaItems: NodeList,
+  colaData: any
+) => {
+  Array.prototype.forEach.call(
+    vendingColaItems,
+    (vendingColaItem: HTMLLIElement, index: number) => {
+      vendingColaItem.addEventListener('click', () => {
+        Object.keys(colaData[index]).includes('count')
+          ? rePaintSelectedColaItem(colaData[index])
+          : paintSelectedColaItem(colaData[index]);
+
+        console.log(colaData[index]);
+      });
+    }
+  );
+};
+
+const paintSelectedColaItem = (colaData: colaItem) => {
+  const selectedColaParentEl: HTMLUListElement | null = document.querySelector(
+    '.selected-cola-list'
+  );
+  if (!colaData.count) colaData.count = 1;
+
+  if (selectedColaParentEl) {
+    selectedColaParentEl.insertAdjacentHTML(
+      'afterbegin',
+      horizonColaItemTemplate(colaData)
+    );
+  }
+};
+
+const rePaintSelectedColaItem = (colaData: colaItem) => {
+  const selectedColaItems: NodeList = document.querySelectorAll(
+    '.selected-cola-item'
+  );
+
+  if (colaData.count && colaData.count < MAX_COLA_COUNT) {
+    colaData.count ? (colaData.count += 1) : (colaData.count = 1);
+
+    selectedColaItems.forEach((selectedColaItem: any) => {
+      if (selectedColaItem.innerText.slice(0, -3) === colaData.type) {
+        selectedColaItem.childNodes[1].childNodes[3].childNodes[3].childNodes[0].data =
+          colaData.count;
+      }
+    });
+  } else {
+    console.log('품절 클래스 추가');
+  }
+};
+
+//
+const horizonColaItemTemplate = (colaData: colaItem) => {
+  return `
+  <li class="selected-cola-item">
+   <figure class="horizontal-cola-figure">
+    <img
+                    src=${colaData.image}
+                    alt=${colaData.color} cola
+                    class="vending-cola_img"
+                  />
+    <figcaption>
+      <p class="base-font-small">${colaData.type}</p>
+      <p class="horizontal-cola_count base-font-normal_14">${colaData.count}</p>
+    </figcaption>
+   </figure>
+  </li>
+  `;
+};
 // 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
 // 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
 
@@ -115,5 +185,6 @@ getColas()
   .then((colaData) => {
     const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
     vendingColaItemHoverEvent(vendingColaItems);
+    vendingColaItemClickEvent(vendingColaItems, colaData);
     return colaData;
   });
