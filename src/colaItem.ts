@@ -59,7 +59,7 @@ const vendingColaItemClickEvent = (
     (vendingColaItem: HTMLLIElement, index: number) => {
       vendingColaItem.addEventListener('click', () => {
         Object.keys(colaData[index]).includes('count')
-          ? rePaintSelectedColaItem(colaData[index])
+          ? rePaintSelectedColaItem(colaData[index], vendingColaItem)
           : paintSelectedColaItem(colaData[index]);
 
         console.log(colaData[index]);
@@ -82,7 +82,10 @@ const paintSelectedColaItem = (colaData: colaItem) => {
   }
 };
 
-const rePaintSelectedColaItem = (colaData: colaItem) => {
+const rePaintSelectedColaItem = (
+  colaData: colaItem,
+  vendingColaItem: HTMLLIElement
+) => {
   const selectedColaItems: NodeList = document.querySelectorAll(
     '.selected-cola-item'
   );
@@ -96,12 +99,15 @@ const rePaintSelectedColaItem = (colaData: colaItem) => {
           colaData.count;
       }
     });
+  }
+
+  if (colaData.count === MAX_COLA_COUNT) {
+    vendingColaItem.classList.add('cola-item_sold-out');
   } else {
-    console.log('품절 클래스 추가');
+    vendingColaItem.classList.remove('cola-item_sold-out');
   }
 };
 
-//
 const horizonColaItemTemplate = (colaData: colaItem) => {
   return `
   <li class="selected-cola-item">
@@ -119,6 +125,10 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
   </li>
   `;
 };
+
+// todo : 똑같은 방식으로 선택된 콜라 클릭시 colaData를 -1 => rePaintSelectedColaItem을 호출해서 다시 그린 뒤 (이때 품절 상태 지우기도 함께 작동) ? 이건 count+ 이벤트라서 새로 만들어야하나.. => 어쨋튼 colaData만 count 줄이면 될듯
+// 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
+
 // 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
 // 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
 
