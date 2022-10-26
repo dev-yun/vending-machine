@@ -283,23 +283,23 @@ body {
   background-color: #ffffff;
 }
 
-.insert-cash {
+.deposit-money {
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+
+  padding-left: 10px;
 }
 
-.insert-cash::placeholder {
+.deposit-money::placeholder {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 19px;
   color: #bdbdbd;
-
-  padding: 6px;
 }
 
-.insert-cash-button {
+.deposit-money-button {
   background-color: #ffffff;
 }
 
@@ -383,7 +383,7 @@ body {
   border: 1px solid #bdbdbd;
 }
 
-.total-price {
+.purchased-cola-article > p {
   text-align: end;
 }
 

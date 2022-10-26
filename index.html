@@ -87,17 +87,21 @@
         </ul>
         <div class="wrapper controls">
           <p class="change base-font-normal_14">
-            잔액 : <strong class="change_price">1,000원</strong>
+            잔액 : <strong class="balance">1000원</strong>
           </p>
           <button class="change-button button-design base-font-normal_13">
             거스름돈 반환
           </button>
           <input
             type="number"
-            class="insert-cash base-font-normal_14"
+            class="deposit-money base-font-normal_14"
             placeholder="입금액 입력"
+            min="1000"
+            step="1000"
           />
-          <button class="insert-cash-button button-design base-font-normal_14">
+          <button
+            class="deposit-money-button button-design base-font-normal_14"
+          >
             입금
           </button>
           <ul class="selected-cola-list scroll_custom">
@@ -148,7 +152,10 @@
         <h2 class="ir_wa">소지금과 획득한 음료 목록</h2>
         <div class="rest-cash-box wrapper">
           <p class="rest-cash base-font-normal_14">
-            소지금 : <strong class="base-font-normal_14_bold">25,000 원</strong>
+            소지금 :
+            <strong class="pocket-money base-font-normal_14_bold"
+              >25000원</strong
+            >
           </p>
         </div>
         <article class="purchased-cola-article wrapper">
@@ -209,7 +216,9 @@
               </figure>
             </li> -->
           </ul>
-          <p class="total-price base-font-normal">총금액 : 9,000 원</p>
+          <p class="base-font-normal">
+            총금액 : <strong class="total-price">9000원</strong>
+          </p>
         </article>
       </section>
     </main>
