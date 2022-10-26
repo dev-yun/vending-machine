@@ -132,61 +132,6 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
 // 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
 // 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
 
-// const vendingColaItemClickEvent = (
-//   vendingColaItems: NodeList,
-//   colaList: any
-// ) => {
-//   Array.prototype.forEach.call(
-//     vendingColaItems,
-//     (colaItem: Element, index: number) => {
-//       colaItem.addEventListener('click', () => {
-//         console.log(colaList[index]);
-//         if (colaList[index].count > 0) {
-//           colaItem.classList.remove('cola-item_sold-out');
-//           colaList[index].selectedCount += 1;
-//           paintSelectedCola(colaList[index]);
-//         } else {
-//           colaItem.classList.add('cola-item_sold-out');
-//           colaList[index].count = 1;
-//         }
-//         colaList[index].count -= 1;
-//       });
-//     }
-//   );
-// };
-
-// // todo : 클릭될때 새로운 요소가 추가되는 것이 아니라 기존의 요소에서 colaItem.selectedCount 부분만 변해야함
-
-// const paintSelectedCola = (colaItem: selectedColaItem) => {
-//   const selectedColaParent: HTMLUListElement | null = document.querySelector(
-//     '.selected-cola-list'
-//   );
-//   if (selectedColaParent !== null) {
-//     selectedColaParent.insertAdjacentHTML(
-//       'afterbegin',
-//       `<li class="selected-cola-item">
-//     <figure class="horizontal-cola-figure">
-//     <img
-//                    src=${colaItem.image}
-//                    alt=${colaItem.color}
-//                    class="vending-cola_img"
-//                  />
-//     <figcaption>
-//     <p class="base-font-small">${colaItem.type}</p>
-//     <p class="horizontal-cola_count base-font-normal_14">${colaItem.selectedCount}</p>
-//     </figcaption>
-//     </figure>
-//     </li>`
-//     );
-//   } else {
-//   }
-// };
-
-// then 1 : colaList를 만들고 hover이벤트 추가 =>
-// then 2 : 음료 클릭 => 선택한 음료를 추가
-// => (안보이지만 선택한 음료의 총합 금액 저장) => 획득
-// => 획득한 음료로 이동
-
 getColas()
   .then((colaData) => {
     paintVendingColaList(colaData);
