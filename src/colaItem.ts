@@ -140,6 +140,11 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
 // 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
 // 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
 
+// 선택된 콜라 클릭 이벤트
+const selectedColaClickEvent = (e: any, colaData: colaItem) => {
+  console.log(e);
+};
+
 // 입금액을 입력하고 입금을 누르면 소지금에서 차감되고 잔액으로 변경
 
 // 거스름돈 반환 누르면 잔액이 소지금으로 전환
@@ -158,4 +163,19 @@ getColas()
     vendingColaItemHoverEvent(vendingColaItems);
     vendingColaItemClickEvent(vendingColaItems, colaData);
     return colaData;
+  })
+  .then((colaData) => {
+    const selectedColaList: Element | null = document.querySelector(
+      '.selected-cola-list'
+    );
+
+    if (selectedColaList !== null) {
+      console.dir(selectedColaList);
+      selectedColaList.addEventListener('click', (e: any) => {
+        console.dir(selectedColaList);
+        e.target.className === 'selected-cola-list scroll_custom'
+          ? ''
+          : selectedColaClickEvent(e, colaData);
+      });
+    }
   });
