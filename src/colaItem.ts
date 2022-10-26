@@ -9,6 +9,7 @@ interface colaItem {
   count?: number;
 }
 
+// json data 가져오기
 async function getColas() {
   const response = await fetch('./src/items.json');
   const result = await response.json();
@@ -16,6 +17,7 @@ async function getColas() {
   return colaData;
 }
 
+// 받아온 json data로 자판기 판매 콜라 생성
 const paintVendingColaList = (colaData: any) => {
   const vendingColaParentEl: HTMLUListElement | null =
     document.querySelector('.cola-list');
@@ -26,6 +28,7 @@ const paintVendingColaList = (colaData: any) => {
   }
 };
 
+// 실제 그려지는 자판기 콜라 레이아웃 템플릿
 const vendingColaTemplate = (cola: colaItem) => {
   return `<li class="cola-item">
         <button class="vending-cola-button">
@@ -36,6 +39,7 @@ const vendingColaTemplate = (cola: colaItem) => {
       </li>`;
 };
 
+// 자판기 콜라에 hover이벤트 추가
 const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
   Array.prototype.forEach.call(
     vendingColaItems,
@@ -50,6 +54,7 @@ const vendingColaItemHoverEvent = (vendingColaItems: NodeList) => {
   );
 };
 
+// 자판기 콜라 클릭시 선택된 콜라 추가
 const vendingColaItemClickEvent = (
   vendingColaItems: NodeList,
   colaData: any
@@ -68,6 +73,7 @@ const vendingColaItemClickEvent = (
   );
 };
 
+// 선택된 콜라 생성
 const paintSelectedColaItem = (colaData: colaItem) => {
   const selectedColaParentEl: HTMLUListElement | null = document.querySelector(
     '.selected-cola-list'
@@ -82,6 +88,7 @@ const paintSelectedColaItem = (colaData: colaItem) => {
   }
 };
 
+// 콜라가 여러번 클릭되면 이미 생성된 콜라에 count만 변경
 const rePaintSelectedColaItem = (
   colaData: colaItem,
   vendingColaItem: HTMLLIElement
@@ -108,6 +115,7 @@ const rePaintSelectedColaItem = (
   }
 };
 
+// 선택된 콜라와 획득한 콜라의 레이아웃 템플릿
 const horizonColaItemTemplate = (colaData: colaItem) => {
   return `
   <li class="selected-cola-item">
@@ -131,6 +139,14 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
 
 // 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
 // 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
+
+// 입금액을 입력하고 입금을 누르면 소지금에서 차감되고 잔액으로 변경
+
+// 거스름돈 반환 누르면 잔액이 소지금으로 전환
+//  - 콜라의 총 금액이 잔액보다 작을 때 획득을 누르면 잔액 -= 콜라의 총 금액 후 잔액 변경
+//  - 콜라의 총 금액이 잔액보다 크면 획득에 x 마우스 호버 이벤트와 아래 경고 문구 출력
+
+// 소지금은 처음에 prompt 창으로 입력?
 
 getColas()
   .then((colaData) => {
