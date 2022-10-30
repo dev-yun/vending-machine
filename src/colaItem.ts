@@ -1,7 +1,5 @@
 const MAX_COLA_COUNT = 5;
 
-// 자판기 콜라를 만들고 =>
-
 // 자판기 콜라 선택 아이템 생성 & 선택 function (coke로 할껄...)
 interface colaItem {
   image: string;
@@ -143,12 +141,6 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
   `;
 };
 
-// todo : 똑같은 방식으로 선택된 콜라 클릭시 colaData를 -1 => rePaintSelectedColaItem을 호출해서 다시 그린 뒤 (이때 품절 상태 지우기도 함께 작동) ? 이건 count+ 이벤트라서 새로 만들어야하나.. => 어쨋튼 colaData만 count 줄이면 될듯
-// 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
-
-// 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
-// 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
-
 // 선택된 콜라 클릭 이벤트
 const selectedColaClickEvent = (e: any, colaData: colaItem) => {
   const targetCola = e.path.find(
@@ -162,6 +154,7 @@ const selectedColaClickEvent = (e: any, colaData: colaItem) => {
   });
 };
 
+// 선택된 콜라 클릭 시 count -- && 자판기의 품절 클래스 삭제
 const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
   const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
 
@@ -185,7 +178,9 @@ const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
     }
   });
 };
-//문제점 1. 페이지 로딩 순서가 전체 실행 => 비동기 코드 실행 => ... 인데
+
+// 입금, 잔액, 거스름돈, 소지금 관련 ..
+// 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
 
 getColas()
   .then((colaData) => {
