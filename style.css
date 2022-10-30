@@ -100,21 +100,23 @@ body {
 }
 
 /* 수평 콜라 figure */
-.horizontal-cola-figure {
+.horizontal-cola-button {
   display: flex;
   align-items: center;
 
   width: 100%;
   height: 100%;
+
+  border-radius: 15px;
 }
 
-.horizontal-cola-figure > img {
+.horizontal-cola-button > img {
   width: 18px;
   height: 33px;
-  padding: 10px;
+  padding: 0px 8px;
 }
 
-.horizontal-cola-figure > figcaption {
+.horizontal-cola-button > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,7 +136,7 @@ body {
   border: 1px solid #bdbdbd;
   border-radius: 5px;
 
-  margin: 8px;
+  margin: 5px;
 }
 
 /* header */
@@ -283,23 +285,23 @@ body {
   background-color: #ffffff;
 }
 
-.insert-cash {
+.deposit-money {
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+
+  padding-left: 10px;
 }
 
-.insert-cash::placeholder {
+.deposit-money::placeholder {
   font-family: 'Noto Sans KR';
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 19px;
   color: #bdbdbd;
-
-  padding: 6px;
 }
 
-.insert-cash-button {
+.deposit-money-button {
   background-color: #ffffff;
 }
 
@@ -383,7 +385,7 @@ body {
   border: 1px solid #bdbdbd;
 }
 
-.total-price {
+.purchased-cola-article > p {
   text-align: end;
 }
 
