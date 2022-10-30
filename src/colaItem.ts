@@ -182,6 +182,19 @@ const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
 // 입금, 잔액, 거스름돈, 소지금 관련 ..
 // 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
 
+// 입금액을 입력하고 입금을 누르면 소지금에서 차감되고 잔액으로 변경
+
+// 거스름돈 반환 누르면 잔액이 소지금으로 전환
+//  - 콜라의 총 금액이 잔액보다 작을 때 획득을 누르면 잔액 -= 콜라의 총 금액 후 잔액 변경
+//  - 콜라의 총 금액이 잔액보다 크면 획득에 x 마우스 호버 이벤트와 아래 경고 문구 출력
+
+// 소지금은 처음에 prompt 창으로 입력?
+
+const pocketMoney = document.querySelector('.pocket-money');
+const depositBtn = document.querySelector('.deposit-money-button');
+const balance = document.querySelector('.balance');
+const balanceBtn = document.querySelector('.change-button');
+
 getColas()
   .then((colaData) => {
     paintVendingColaList(colaData);
