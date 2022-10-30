@@ -1,5 +1,7 @@
 const MAX_COLA_COUNT = 5;
 
+// 자판기 콜라를 만들고 =>
+
 // 자판기 콜라 선택 아이템 생성 & 선택 function (coke로 할껄...)
 interface colaItem {
   image: string;
@@ -108,6 +110,13 @@ const rePaintSelectedColaItem = (
     });
   }
 
+  toggleSoldOutClass(vendingColaItem, colaData);
+};
+
+const toggleSoldOutClass = (
+  vendingColaItem: HTMLLIElement,
+  colaData: colaItem
+) => {
   if (colaData.count === MAX_COLA_COUNT) {
     vendingColaItem.classList.add('cola-item_sold-out');
   } else {
@@ -119,17 +128,17 @@ const rePaintSelectedColaItem = (
 const horizonColaItemTemplate = (colaData: colaItem) => {
   return `
   <li class="selected-cola-item">
-   <figure class="horizontal-cola-figure">
+   <button class="horizontal-cola-button">
     <img
                     src=${colaData.image}
                     alt=${colaData.color} cola
                     class="vending-cola_img"
                   />
-    <figcaption>
+    <div>
       <p class="base-font-small">${colaData.type}</p>
-      <p class="horizontal-cola_count base-font-normal_14">${colaData.count}</p>
-    </figcaption>
-   </figure>
+      <p class="horizontal-cola_count base-font-normal_14">${colaData.count}</p> 
+    </div>
+    </button>
   </li>
   `;
 };
@@ -142,16 +151,41 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
 
 // 선택된 콜라 클릭 이벤트
 const selectedColaClickEvent = (e: any, colaData: colaItem) => {
-  console.log(e);
+  const targetCola = e.path.find(
+    (item: Element) => item.className === 'selected-cola-item'
+  );
+
+  Array.prototype.forEach.call(colaData, (data) => {
+    if (data.type === targetCola.innerText.slice(0, -3)) {
+      minusSelectedColaCount(data, targetCola);
+    }
+  });
 };
 
-// 입금액을 입력하고 입금을 누르면 소지금에서 차감되고 잔액으로 변경
+const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
+  const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
 
-// 거스름돈 반환 누르면 잔액이 소지금으로 전환
-//  - 콜라의 총 금액이 잔액보다 작을 때 획득을 누르면 잔액 -= 콜라의 총 금액 후 잔액 변경
-//  - 콜라의 총 금액이 잔액보다 크면 획득에 x 마우스 호버 이벤트와 아래 경고 문구 출력
+  if (colaData.count && colaData.count > 0) {
+    colaData.count -= 1;
 
-// 소지금은 처음에 prompt 창으로 입력?
+    selectedCola.childNodes[1].childNodes[3].childNodes[3].childNodes[0].data =
+      colaData.count;
+  }
+
+  if (colaData.count === 0) {
+    selectedCola.parentNode.removeChild(selectedCola);
+    delete colaData.count;
+  }
+
+  vendingColaItems.forEach((vendingItem: any) => {
+    if (
+      vendingItem.innerText.slice(0, -6) === selectedCola.innerText.slice(0, -3)
+    ) {
+      toggleSoldOutClass(vendingItem, colaData);
+    }
+  });
+};
+//문제점 1. 페이지 로딩 순서가 전체 실행 => 비동기 코드 실행 => ... 인데
 
 getColas()
   .then((colaData) => {
@@ -170,9 +204,8 @@ getColas()
     );
 
     if (selectedColaList !== null) {
-      console.dir(selectedColaList);
       selectedColaList.addEventListener('click', (e: any) => {
-        console.dir(selectedColaList);
+        console.log(e);
         e.target.className === 'selected-cola-list scroll_custom'
           ? ''
           : selectedColaClickEvent(e, colaData);
