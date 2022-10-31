@@ -190,10 +190,37 @@ const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
 
 // 소지금은 처음에 prompt 창으로 입력?
 
-const pocketMoney = document.querySelector('.pocket-money');
+const pocketEl: HTMLElement | null = document.querySelector('.pocket-money');
+const depositEl: HTMLInputElement | null =
+  document.querySelector('.deposit-money');
+const balanceEl: HTMLElement | null = document.querySelector('.balance');
 const depositBtn = document.querySelector('.deposit-money-button');
-const balance = document.querySelector('.balance');
 const balanceBtn = document.querySelector('.change-button');
+const gainBtn = document.querySelector('.gain-button');
+
+// 1. 입금액 입력하고 입금 버튼 클릭 => 소지금에서 -= 입금액(deposit), 잔액(balance) += 입금액
+// 만약 입금액이 소지금보다 크면 입금액 클릭 못함 (preventDefault?)
+depositBtn!.addEventListener('click', (e) => {
+  const pocketMoney = parseInt(pocketEl!.innerText.slice(0, -1), 10);
+  const depositMoney = parseInt(depositEl!.value);
+  const balance =
+    balanceEl!.innerText.slice(0, -1) === ''
+      ? 0
+      : parseInt(balanceEl!.innerText.slice(0, -1), 10);
+
+  if (depositMoney > pocketMoney) {
+    e.preventDefault();
+  } else {
+    pocketEl!.innerText = `${pocketMoney - depositMoney}원`;
+    balanceEl!.innerText = `${balance + depositMoney}원`;
+  }
+});
+
+// 2. 획득 버튼 클릭 시 선택된 콜라의 count * price의 합과 잔액을 비교해서 잔액이 작으면 버튼을 못누르고, 잔액이 크면 획득 성공!
+// 획득 버튼 클릭 성공 시 구매한 콜라 리스트에 선택된 콜라 리스트를 그대로 그리기
+// 구매한 콜라의 리스트 count * price를 구해서 총금액 변환
+
+// 3. 거스름돈 반환 클릭 시 잔액을 0으로 변환하고, 소지금 += 잔액;
 
 getColas()
   .then((colaData) => {
