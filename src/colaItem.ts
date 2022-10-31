@@ -1,7 +1,5 @@
 const MAX_COLA_COUNT = 5;
 
-// 자판기 콜라를 만들고 =>
-
 // 자판기 콜라 선택 아이템 생성 & 선택 function (coke로 할껄...)
 interface colaItem {
   image: string;
@@ -64,12 +62,16 @@ const vendingColaItemClickEvent = (
   Array.prototype.forEach.call(
     vendingColaItems,
     (vendingColaItem: HTMLLIElement, index: number) => {
-      vendingColaItem.addEventListener('click', () => {
-        Object.keys(colaData[index]).includes('count')
-          ? rePaintSelectedColaItem(colaData[index], vendingColaItem)
-          : paintSelectedColaItem(colaData[index]);
-
-        console.log(colaData[index]);
+      vendingColaItem.addEventListener('click', (e) => {
+        if (
+          vendingColaItem.className.split(' ').includes('cola-item_sold-out')
+        ) {
+          e.preventDefault();
+        } else {
+          Object.keys(colaData[index]).includes('count')
+            ? rePaintSelectedColaItem(colaData[index], vendingColaItem)
+            : paintSelectedColaItem(colaData[index]);
+        }
       });
     }
   );
@@ -95,19 +97,33 @@ const rePaintSelectedColaItem = (
   colaData: colaItem,
   vendingColaItem: HTMLLIElement
 ) => {
-  const selectedColaItems: NodeList = document.querySelectorAll(
-    '.selected-cola-item'
+  const selectedColaParentEl: any = document.querySelector(
+    '.selected-cola-list'
   );
 
-  if (colaData.count && colaData.count < MAX_COLA_COUNT) {
-    colaData.count ? (colaData.count += 1) : (colaData.count = 1);
+  if (selectedColaParentEl.children.length > 0) {
+    if (colaData.count && colaData.count < MAX_COLA_COUNT) {
+      colaData.count ? (colaData.count += 1) : (colaData.count = 1);
 
-    selectedColaItems.forEach((selectedColaItem: any) => {
-      if (selectedColaItem.innerText.slice(0, -3) === colaData.type) {
-        selectedColaItem.childNodes[1].childNodes[3].childNodes[3].childNodes[0].data =
-          colaData.count;
+      for (let i = 0; i < selectedColaParentEl!.children.length; i++) {
+        if (
+          selectedColaParentEl!.children[i].innerText.slice(0, -3) ===
+          colaData.type
+        ) {
+          selectedColaParentEl!.children[
+            i
+          ].childNodes[1].childNodes[3].childNodes[3].childNodes[0].data =
+            colaData.count;
+        }
       }
-    });
+    }
+  } else {
+    if (selectedColaParentEl) {
+      selectedColaParentEl.insertAdjacentHTML(
+        'afterbegin',
+        horizonColaItemTemplate(colaData)
+      );
+    }
   }
 
   toggleSoldOutClass(vendingColaItem, colaData);
@@ -143,12 +159,6 @@ const horizonColaItemTemplate = (colaData: colaItem) => {
   `;
 };
 
-// todo : 똑같은 방식으로 선택된 콜라 클릭시 colaData를 -1 => rePaintSelectedColaItem을 호출해서 다시 그린 뒤 (이때 품절 상태 지우기도 함께 작동) ? 이건 count+ 이벤트라서 새로 만들어야하나.. => 어쨋튼 colaData만 count 줄이면 될듯
-// 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
-
-// 벤딩머신 관점 : 콜라 클릭 => count가 없으면 count를 1로 초기화 있으면 1추가 => count가 Max-count 상수와 같아지면 판매완료 스타일 추가
-// 선택된 콜라 관점 : 콜라 클릭 => count가 1이상이면 화면에 그리기 => event의 target.value와 요청한 colaData[i]가 같으면 해당 콜라의 count만 변경 => 만약 다시 선택된 콜라를 클릭하면
-
 // 선택된 콜라 클릭 이벤트
 const selectedColaClickEvent = (e: any, colaData: colaItem) => {
   const targetCola = e.path.find(
@@ -162,6 +172,7 @@ const selectedColaClickEvent = (e: any, colaData: colaItem) => {
   });
 };
 
+// 선택된 콜라 클릭 시 count -- && 자판기의 품절 클래스 삭제
 const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
   const vendingColaItems: NodeList = document.querySelectorAll('.cola-item');
 
@@ -185,7 +196,102 @@ const minusSelectedColaCount = (colaData: colaItem, selectedCola: any) => {
     }
   });
 };
-//문제점 1. 페이지 로딩 순서가 전체 실행 => 비동기 코드 실행 => ... 인데
+
+// 입금, 잔액, 거스름돈, 소지금 관련 ..
+// 다음 과제 => price * count만큼 계산해서 콜라 비용을 구하기 & 입금액과 빼기 & 남은돈 잔액에 추가하기
+
+// 입금액을 입력하고 입금을 누르면 소지금에서 차감되고 잔액으로 변경
+
+// 거스름돈 반환 누르면 잔액이 소지금으로 전환
+//  - 콜라의 총 금액이 잔액보다 작을 때 획득을 누르면 잔액 -= 콜라의 총 금액 후 잔액 변경
+//  - 콜라의 총 금액이 잔액보다 크면 획득에 x 마우스 호버 이벤트와 아래 경고 문구 출력
+
+// 소지금은 처음에 prompt 창으로 입력?
+
+const pocketEl: HTMLElement | null = document.querySelector('.pocket-money');
+const depositEl: HTMLInputElement | null =
+  document.querySelector('.deposit-money');
+const balanceEl: HTMLElement | null = document.querySelector('.balance');
+const totalPrice: HTMLElement | null = document.querySelector('.total-price');
+const depositBtn = document.querySelector('.deposit-money-button');
+const balanceBtn = document.querySelector('.change-button');
+const gainBtn = document.querySelector('.gain-button');
+
+// 1. 입금액 입력하고 입금 버튼 클릭 => 소지금에서 -= 입금액(deposit), 잔액(balance) += 입금액
+// 만약 입금액이 소지금보다 크면 입금액 클릭 못함 (preventDefault?)
+depositBtn!.addEventListener('click', (e) => {
+  const pocketMoney = parseInt(pocketEl!.innerText.slice(0, -1), 10);
+  const depositMoney = parseInt(depositEl!.value);
+  const balance =
+    balanceEl!.innerText.slice(0, -1) === '0'
+      ? 0
+      : parseInt(balanceEl!.innerText.slice(0, -1), 10);
+
+  if (depositMoney > pocketMoney) {
+    e.preventDefault();
+  } else {
+    pocketEl!.innerText = `${pocketMoney - depositMoney}원`;
+    balanceEl!.innerText = `${balance + depositMoney}원`;
+    depositEl!.value = '';
+  }
+});
+
+// 2. 획득 버튼 클릭 시 선택된 콜라의 count * price의 합과 잔액을 비교해서 잔액이 작으면 버튼을 못누르고, 잔액이 크면 획득 성공!
+// 획득 버튼 클릭 성공 시 구매한 콜라 리스트에 선택된 콜라 리스트를 그대로 그리기
+// 구매한 콜라의 리스트 count * price를 구해서 총금액 변환
+const purchasedColaClickEvent = (colaData: any, e: any) => {
+  const balanceEl: HTMLElement | null = document.querySelector('.balance');
+  const selectedColaList: Element | null = document.querySelector(
+    '.selected-cola-list'
+  );
+  const purchasedColaList: Element | null = document.querySelector(
+    '.purchased-cola-list'
+  );
+
+  let selectedPrice = 0;
+  const balance =
+    balanceEl!.innerText.slice(0, -1) === '0'
+      ? 0
+      : parseInt(balanceEl!.innerText.slice(0, -1), 10);
+
+  for (let i = 0; i < selectedColaList!.children.length; i++) {
+    const selectedColaCount = Number(
+      selectedColaList!.children[i].childNodes[1].childNodes[3].childNodes[3]
+        .childNodes[0].textContent
+    );
+
+    selectedPrice += selectedColaCount * 1000;
+  }
+
+  if (balance < selectedPrice) {
+    e.preventDefault();
+  } else {
+    balanceEl!.innerText = `${balance - selectedPrice}원`;
+    if (purchasedColaList !== null) {
+      purchasedColaList.insertAdjacentHTML(
+        'afterbegin',
+        selectedColaList!.innerHTML
+      );
+
+      selectedColaList!.innerHTML = ``;
+    }
+    totalPrice!.innerText = `${
+      parseInt(totalPrice!.innerText.slice(0, -1), 10) + selectedPrice
+    }원`;
+  }
+};
+
+// 3. 거스름돈 반환 클릭 시 잔액을 빈 값으로 변환하고, 소지금 += 잔액;
+balanceBtn!.addEventListener('click', () => {
+  const balance =
+    balanceEl!.innerText.slice(0, -1) === '0'
+      ? 0
+      : parseInt(balanceEl!.innerText.slice(0, -1), 10);
+  const pocketMoney = parseInt(pocketEl!.innerText.slice(0, -1), 10);
+
+  balanceEl!.innerText = `0원`;
+  pocketEl!.innerText = `${balance + pocketMoney}원`;
+});
 
 getColas()
   .then((colaData) => {
@@ -211,4 +317,13 @@ getColas()
           : selectedColaClickEvent(e, colaData);
       });
     }
+
+    return colaData;
+  })
+  .then((colaData) => {
+    const gainBtn = document.querySelector('.gain-button');
+
+    gainBtn!.addEventListener('click', (e) =>
+      purchasedColaClickEvent(colaData, e)
+    );
   });
