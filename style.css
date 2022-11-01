@@ -82,12 +82,6 @@ body {
   background-color: inherit;
 }
 
-.scroll_custom::after {
-  content: '';
-  display: block;
-  height: 400px;
-}
-
 /* commons */
 
 .wrapper {

@@ -239,7 +239,9 @@ depositBtn!.addEventListener('click', (e) => {
 // 2. 획득 버튼 클릭 시 선택된 콜라의 count * price의 합과 잔액을 비교해서 잔액이 작으면 버튼을 못누르고, 잔액이 크면 획득 성공!
 // 획득 버튼 클릭 성공 시 구매한 콜라 리스트에 선택된 콜라 리스트를 그대로 그리기
 // 구매한 콜라의 리스트 count * price를 구해서 총금액 변환
-const purchasedColaClickEvent = (colaData: any, e: any) => {
+gainBtn!.addEventListener('click', (e) => purchasedColaClickEvent(e));
+
+const purchasedColaClickEvent = (e: any) => {
   const balanceEl: HTMLElement | null = document.querySelector('.balance');
   const selectedColaList: Element | null = document.querySelector(
     '.selected-cola-list'
@@ -317,13 +319,4 @@ getColas()
           : selectedColaClickEvent(e, colaData);
       });
     }
-
-    return colaData;
-  })
-  .then((colaData) => {
-    const gainBtn = document.querySelector('.gain-button');
-
-    gainBtn!.addEventListener('click', (e) =>
-      purchasedColaClickEvent(colaData, e)
-    );
   });
